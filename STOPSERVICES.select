@@ -1,0 +1,15 @@
+SUBROUTINE STOPSERVICES.SELECT
+
+$USING EB.SystemTables
+$USING EB.Reports
+$USING EB.DataAccess
+$USING EB.Service
+
+
+    STR.SelCmd = 'SELECT ': FN.TSA.SERVICE :' SERVICE.CONTROL EQ AUTO OR SERVICE.CONTROL EQ START AND WITH @ID NE TSM '
+    KeyList = ""
+	EB.DataAccess.Readlist(STR.SelCmd, KeyList, "", Selected, SystemReturnCode)
+	EB.Service.BatchBuildList("",KeyList)
+	
+RETURN
+END
